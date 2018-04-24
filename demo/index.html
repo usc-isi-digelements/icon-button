@@ -1,0 +1,123 @@
+<!--
+Copyright 2018 Next Century Corporation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="../icon-button.html">
+</head>
+
+<body unresolved>
+  <dom-bind id="demo">
+    <script>
+      (function(document) {
+        var demo = document.querySelector('#demo');
+        demo.output = 0;
+        demo.clickListener = {
+          onClick: function() {
+            demo.output++;
+          }
+        };
+      })(document);
+    </script>
+
+    <template is="dom-bind">
+      <p>ICON BUTTON #1</p>
+      <p>Icon = icons:account-circle</p>
+      <p>Style-Class = blue</p>
+      <p>Title-Tooltip = Demo Text</p>
+
+      <icon-button
+        icon="icons:account-circle"
+        style-class="blue"
+        title-tooltip="Demo Text">
+      </icon-button>
+
+      <p>ICON BUTTON #2</p>
+      <p>Active</p>
+      <p>Icon = icons:account-circle</p>
+      <p>Style-Class = blue</p>
+
+      <icon-button
+        active
+        icon="icons:account-circle"
+        style-class="blue">
+      </icon-button>
+
+      <p>ICON BUTTON #3</p>
+      <p>Disabled</p>
+      <p>Icon = icons:account-circle</p>
+      <p>Style-Class = blue</p>
+
+      <icon-button
+        disabled
+        icon="icons:account-circle"
+        style-class="blue">
+      </icon-button>
+
+      <p>ICON BUTTON #4</p>
+      <p>Bigger</p>
+      <p>Icon = icons:account-circle</p>
+
+      <icon-button
+        bigger
+        icon="icons:account-circle">
+      </icon-button>
+
+      <p>ICON BUTTON #5</p>
+      <p>Bigger</p>
+      <p>Icon = icons:account-circle</p>
+      <p>Padded</p>
+
+      <icon-button
+        bigger
+        icon="icons:account-circle"
+        padded>
+      </icon-button>
+
+      <p>ICON BUTTON #6</p>
+      <p>Disabled</p>
+      <p>Icon = icons:account-circle</p>
+
+      <icon-button
+        disabled
+        icon="icons:account-circle">
+      </icon-button>
+
+      <p>ICON BUTTON #7</p>
+      <p>Hide Ripple</p>
+      <p>Icon = icons:account-circle</p>
+
+      <icon-button
+        hide-ripple
+        icon="icons:account-circle">
+      </icon-button>
+
+      <p>ICON BUTTON #8</p>
+      <p>Click-Listener = { onClick: function() { output++; } }<p>
+      <p>Icon = icons:account-circle</p>
+      <p>Output = [[output]]<p>
+
+      <icon-button
+        click-listener="[[clickListener]]"
+        icon="icons:account-circle">
+      </icon-button>
+    </template>
+  </dom-bind>
+</body>
+</html>

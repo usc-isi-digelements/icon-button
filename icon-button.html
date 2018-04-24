@@ -1,0 +1,546 @@
+<!--
+Copyright 2018 Next Century Corporation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../fontawesome-iconset/fa-all.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-styles/color.html">
+
+<!--
+A Polymer Element showing a stylized icon button.
+
+### Example
+```js
+var clickListener = {
+  onClick: function() {
+    // on-click behavior
+  }
+};
+```
+
+```html
+<icon-button
+  click-listener="[[clickListener]]"
+  icon="icons:polymer"
+  style-class="style-class"
+  title-tooltip="Text">
+</icon-button>
+```
+
+### Styling
+
+`<icon-button>` provides the following custom properties and mixins for styling:
+
+Custom property                | Description                                             | Default
+-------------------------------|---------------------------------------------------------|--------
+`--icon-button-color`          | The color for the icon button.                          | --paper-grey-600
+`--icon-button-mixin`          | The custom style mixin for the icon button.             | none
+`--icon-button-active-color`   | The color for the icon button if active.                | --paper-grey-900
+`--icon-button-active-mixin`   | The custom style mixin for the icon button if active.   | none
+`--icon-button-disabled-color` | The color for the icon button if disabled.              | --paper-grey-300
+`--icon-button-disabled-mixin` | The custom style mixin for the icon button if disabled. | none
+`--icon-button-hovering-mixin` | The color for the icon button if hovering.              | --paper-grey-900
+`--icon-button-hovering-mixin` | The custom style mixin for the icon button if hovering. | none
+
+@demo demo/index.html
+-->
+
+<dom-module id="icon-button">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      paper-icon-button {
+        border-radius: 50%;
+        color: var(--icon-button-color, var(--paper-grey-600));
+        cursor: pointer;
+        height: 20px;
+        width: 20px;
+        line-height: 20px;
+        min-height: 20px;
+        min-width: 20px;
+        padding: 0;
+        @apply --icon-button-mixin;
+      }
+
+      paper-icon-button.active {
+        color: var(--icon-button-active-color, var(--paper-grey-900));
+        @apply --icon-button-active-mixin;
+      }
+
+      paper-icon-button.bigger {
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        min-height: 30px;
+        min-width: 30px;
+      }
+
+      paper-icon-button.padded {
+        padding: 5px;
+      }
+
+      paper-icon-button[disabled] {
+        color: var(--icon-button-disabled-color, var(--paper-grey-300));
+        @apply --icon-button-disabled-mixin;
+      }
+
+      paper-icon-button:hover {
+        color: var(--icon-button-hovering-color, var(--paper-grey-900));
+        @apply --icon-button-hovering-mixin;
+      }
+
+      paper-icon-button.amber {
+        color: var(--paper-amber-600);
+      }
+
+      paper-icon-button.black {
+        color: #111;
+      }
+
+      paper-icon-button.blue {
+        color: var(--paper-blue-600);
+      }
+
+      paper-icon-button.blue-grey {
+        color: var(--paper-blue-grey-600);
+      }
+
+      paper-icon-button.brown {
+        color: var(--paper-brown-600);
+      }
+
+      paper-icon-button.cyan {
+        color: var(--paper-cyan-600);
+      }
+
+      paper-icon-button.deep-orange {
+        color: var(--paper-deep-orange-600);
+      }
+
+      paper-icon-button.deep-purple {
+        color: var(--paper-deep-purple-600);
+      }
+
+      paper-icon-button.green {
+        color: var(--paper-green-600);
+      }
+
+      paper-icon-button.grey {
+        color: var(--paper-grey-600);
+      }
+
+      paper-icon-button.indigo {
+        color: var(--paper-indigo-600);
+      }
+
+      paper-icon-button.light-blue {
+        color: var(--paper-light-blue-600);
+      }
+
+      paper-icon-button.light-green {
+        color: var(--paper-light-green-600);
+      }
+
+      paper-icon-button.lime {
+        color: var(--paper-lime-600);
+      }
+
+      paper-icon-button.orange {
+        color: var(--paper-orange-600);
+      }
+
+      paper-icon-button.pink {
+        color: var(--paper-pink-600);
+      }
+
+      paper-icon-button.purple {
+        color: var(--paper-purple-600);
+      }
+
+      paper-icon-button.red {
+        color: var(--paper-red-600);
+      }
+
+      paper-icon-button.teal {
+        color: var(--paper-teal-600);
+      }
+
+      paper-icon-button.white {
+        color: #fff;
+      }
+
+      paper-icon-button.yellow {
+        color: var(--paper-yellow-600);
+      }
+
+      paper-icon-button.amber.active,
+      paper-icon-button.amber:hover {
+        color: var(--paper-amber-900);
+      }
+
+      paper-icon-button.blue.active,
+      paper-icon-button.blue:hover {
+        color: var(--paper-blue-900);
+      }
+
+      paper-icon-button.blue-grey.active,
+      paper-icon-button.blue-grey:hover {
+        color: var(--paper-blue-grey-900);
+      }
+
+      paper-icon-button.brown.active,
+      paper-icon-button.brown:hover {
+        color: var(--paper-brown-900);
+      }
+
+      paper-icon-button.cyan.active,
+      paper-icon-button.cyan:hover {
+        color: var(--paper-cyan-900);
+      }
+
+      paper-icon-button.deep-orange.active,
+      paper-icon-button.deep-orange:hover {
+        color: var(--paper-deep-orange-900);
+      }
+
+      paper-icon-button.deep-purple.active,
+      paper-icon-button.deep-purple:hover {
+        color: var(--paper-deep-purple-900);
+      }
+
+      paper-icon-button.green.active,
+      paper-icon-button.green:hover {
+        color: var(--paper-green-900);
+      }
+
+      paper-icon-button.grey.active,
+      paper-icon-button.grey:hover {
+        color: var(--paper-grey-900);
+      }
+
+      paper-icon-button.indigo.active,
+      paper-icon-button.indigo:hover {
+        color: var(--paper-indigo-900);
+      }
+
+      paper-icon-button.light-blue.active,
+      paper-icon-button.light-blue:hover {
+        color: var(--paper-light-blue-900);
+      }
+
+      paper-icon-button.light-green.active,
+      paper-icon-button.light-green:hover {
+        color: var(--paper-light-green-900);
+      }
+
+      paper-icon-button.lime.active,
+      paper-icon-button.lime:hover {
+        color: var(--paper-lime-900);
+      }
+
+      paper-icon-button.orange.active,
+      paper-icon-button.orange:hover {
+        color: var(--paper-orange-900);
+      }
+
+      paper-icon-button.pink.active,
+      paper-icon-button.pink:hover {
+        color: var(--paper-pink-900);
+      }
+
+      paper-icon-button.purple.active,
+      paper-icon-button.purple:hover {
+        color: var(--paper-purple-900);
+      }
+
+      paper-icon-button.red.active,
+      paper-icon-button.red:hover {
+        color: var(--paper-red-900);
+      }
+
+      paper-icon-button.teal.active,
+      paper-icon-button.teal:hover {
+        color: var(--paper-teal-900);
+      }
+
+      paper-icon-button.yellow.active,
+      paper-icon-button.yellow:hover {
+        color: var(--paper-yellow-900);
+      }
+
+      paper-icon-button.amber[disabled] {
+        color: var(--paper-amber-100);
+      }
+
+      paper-icon-button.blue[disabled] {
+        color: var(--paper-blue-100);
+      }
+
+      paper-icon-button.blue-grey[disabled] {
+        color: var(--paper-blue-grey-100);
+      }
+
+      paper-icon-button.brown[disabled] {
+        color: var(--paper-brown-100);
+      }
+
+      paper-icon-button.cyan[disabled] {
+        color: var(--paper-cyan-100);
+      }
+
+      paper-icon-button.deep-orange[disabled] {
+        color: var(--paper-deep-orange-100);
+      }
+
+      paper-icon-button.deep-purple[disabled] {
+        color: var(--paper-deep-purple-100);
+      }
+
+      paper-icon-button.green[disabled] {
+        color: var(--paper-green-100);
+      }
+
+      paper-icon-button.grey[disabled] {
+        color: var(--paper-grey-100);
+      }
+
+      paper-icon-button.indigo[disabled] {
+        color: var(--paper-indigo-100);
+      }
+
+      paper-icon-button.light-blue[disabled] {
+        color: var(--paper-light-blue-100);
+      }
+
+      paper-icon-button.light-green[disabled] {
+        color: var(--paper-light-green-100);
+      }
+
+      paper-icon-button.lime[disabled] {
+        color: var(--paper-lime-100);
+      }
+
+      paper-icon-button.orange[disabled] {
+        color: var(--paper-orange-100);
+      }
+
+      paper-icon-button.pink[disabled] {
+        color: var(--paper-pink-100);
+      }
+
+      paper-icon-button.purple[disabled] {
+        color: var(--paper-purple-100);
+      }
+
+      paper-icon-button.red[disabled] {
+        color: var(--paper-red-100);
+      }
+
+      paper-icon-button.teal[disabled] {
+        color: var(--paper-teal-100);
+      }
+
+      paper-icon-button.yellow[disabled] {
+        color: var(--paper-yellow-100);
+      }
+    </style>
+
+    <paper-icon-button
+      class$="[[_getStyleClass(active, bigger, padded, styleClass)]]"
+      disabled="[[disabled]]"
+      icon="[[icon]]"
+      noink="[[hideRipple]]"
+      title="[[titleTooltip]]"
+      on-tap="_onClick">
+    </paper-icon-button>
+  </template>
+
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'icon-button',
+
+      properties: {
+        /**
+         * (Optional)
+         *
+         * Whether the button is active.
+         *
+         * @type {Boolean}
+         * @default false
+         */
+        active: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * (Optional)
+         *
+         * Whether the button is 30px rather than 20px.
+         *
+         * @type {Boolean}
+         * @default false
+         */
+        bigger: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * (Required)
+         *
+         * An object with a function property called if the button is clicked or tapped.
+         * The name of the property in the object is defined in clickProperty.
+         *
+         * @type {Object}
+         * @default {onClick: function() {}}
+         */
+        clickListener: {
+          type: Object,
+          value: function() {
+            return {
+              onClick: function() {}
+            };
+          }
+        },
+
+        /**
+         * (Optional)
+         *
+         * The name of the function property in clickListener.
+         *
+         * @type {String}
+         * @default 'onClick'
+         */
+        clickProperty: {
+          type: String,
+          value: 'onClick'
+        },
+
+        /**
+         * (Optional)
+         *
+         * Whether the button is disabled.
+         *
+         * @type {Boolean}
+         * @default false
+         */
+        disabled: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * (Optional)
+         *
+         * Whether to hide the button ripple.
+         *
+         * @type {Boolean}
+         * @default false
+         */
+        hideRipple: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * (Optional)
+         *
+         * The icon.
+         *
+         * @type {String}
+         * @default ''
+         */
+        icon: {
+          type: String,
+          value: ''
+        },
+
+        /**
+         * (Optional)
+         *
+         * Whether the button is padded 5px rather than 0px.
+         *
+         * @type {Boolean}
+         * @default false
+         */
+        padded: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * (Optional)
+         *
+         * The style class.
+         *
+         * @type {String}
+         * @default ''
+         */
+        styleClass: {
+          type: String,
+          value: ''
+        },
+
+        /**
+         * (Optional)
+         *
+         * The title tooltip.
+         *
+         * @type {String}
+         * @default ''
+         */
+        titleTooltip: {
+          type: String,
+          value: ''
+        }
+      },
+
+      /**
+       * Returns the style class for the icon button.
+       *
+       * @param {Boolean} active
+       * @param {Boolean} bigger
+       * @param {Boolean} padded
+       * @param {String} styleClass
+       * @return {String}
+       * @private
+       */
+      _getStyleClass: function(active, bigger, padded, styleClass) {
+        return (active ? 'active ' : '') + (bigger ? 'bigger ' : '') + (padded ? 'padded ' : '') + styleClass;
+      },
+
+      /**
+       * Calls clickListener[clickProperty] whenever the button is clicked or tapped.
+       *
+       * @event tap
+       * @private
+       */
+      _onClick: function() {
+        this.clickListener[this.clickProperty]();
+      }
+    });
+  })();
+  </script>
+</dom-module>

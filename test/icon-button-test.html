@@ -1,0 +1,136 @@
+<!--
+Copyright 2017 Next Century Corporation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../icon-button.html">
+</head>
+
+<body>
+  <test-fixture id="icon-button-fixture">
+    <template>
+      <icon-button></icon-button>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('icon-button tests', function() {
+      var element;
+
+      setup(function(done) {
+        element = fixture('icon-button-fixture');
+        flush(done);
+      });
+
+      test('properties are set as expected', function() {
+        expect(element.active).to.be.false;
+        expect(element.bigger).to.be.false;
+        expect(element.clickListener).to.be.an('Object');
+        expect(element.clickListener.onClick).to.be.a('Function');
+        expect(element.clickProperty).to.equal('onClick');
+        expect(element.disabled).to.be.false;
+        expect(element.hideRipple).to.be.false;
+        expect(element.icon).to.equal('');
+        expect(element.padded).to.be.false;
+        expect(element.styleClass).to.equal('');
+        expect(element.titleTooltip).to.equal('');
+      });
+
+      test('does show icon button', function() {
+        var button = element.$$('paper-icon-button');
+        expect(button).to.exist;
+        expect(button.classList.contains('active')).to.be.false;
+        expect(button.classList.contains('bigger')).to.be.false;
+        expect(button.classList.contains('padded')).to.be.false;
+        expect(button.disabled).to.be.false;
+        expect(button.icon).to.equal('');
+        expect(button.noink).to.be.false;
+        expect(button.title).to.equal('');
+      });
+
+      test('properties do update icon button', function(done) {
+        element.active = true;
+        element.bigger = true;
+        element.hideRipple = true;
+        element.icon = 'icons:polymer';
+        element.padded = true;
+        element.styleClass = 'testStyleClass';
+        element.titleTooltip = 'testText';
+
+        flush(function() {
+          var button = element.$$('paper-icon-button');
+          expect(button).to.exist;
+          expect(button.classList.contains('active')).to.be.true;
+          expect(button.classList.contains('bigger')).to.be.true;
+          expect(button.classList.contains('padded')).to.be.true;
+          expect(button.classList.contains('testStyleClass')).to.be.true;
+          expect(button.disabled).to.be.false;
+          expect(button.icon).to.equal('icons:polymer');
+          expect(button.noink).to.be.true;
+          expect(button.title).to.equal('testText');
+          done();
+        });
+      });
+
+      test('disabled property does update icon button', function(done) {
+        element.disabled = true;
+
+        flush(function() {
+          var button = element.$$('paper-icon-button');
+          expect(button).to.exist;
+          expect(button.disabled).to.be.true;
+          done();
+        });
+      });
+
+      test('_getStyleClass does return as expected', function() {
+        expect(element._getStyleClass(false, false, false, '')).to.equal('');
+        expect(element._getStyleClass(false, false, false, 'testStyleClass')).to.equal('testStyleClass');
+        expect(element._getStyleClass(true, false, false, '')).to.equal('active ');
+        expect(element._getStyleClass(false, true, false, '')).to.equal('bigger ');
+        expect(element._getStyleClass(false, false, true, '')).to.equal('padded ');
+        expect(element._getStyleClass(true, true, true, 'testStyleClass')).to.equal('active bigger padded testStyleClass');
+      });
+
+      test('_onClick does call clickListener[clickProperty]', function() {
+        var calls = 0;
+        element.clickListener = {
+          onClick: function() {
+            calls++;
+          }
+        };
+
+        element._onClick();
+        expect(calls).to.equal(1);
+
+        element.clickProperty = 'testFunction';
+        element.clickListener = {
+          testFunction: function() {
+            calls++;
+          }
+        };
+
+        element._onClick();
+        expect(calls).to.equal(2);
+      });
+    });
+  </script>
+</body>
+</html>
