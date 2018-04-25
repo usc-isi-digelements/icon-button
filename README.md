@@ -1,6 +1,6 @@
 # icon-button
 
-A Polymer Element showing a stylized icon button.
+A Polymer Element showing a stylized icon button.  Use `stylized-icon` if you do not need click/tap behavior.
 
 ### Example
 ```js
@@ -34,6 +34,30 @@ Custom property                | Description                                    
 `--icon-button-disabled-mixin` | The custom style mixin for the icon button if disabled. | none
 `--icon-button-hovering-mixin` | The color for the icon button if hovering.              | --paper-grey-900
 `--icon-button-hovering-mixin` | The custom style mixin for the icon button if hovering. | none
+
+The `styleClass` property has the following preconfigured options:
+
+- amber
+- black
+- blue
+- blue-grey
+- brown
+- cyan
+- deep-orange
+- deep-purple
+- green
+- grey
+- indigo
+- light-blue
+- light-green
+- lime
+- orange
+- pink
+- purple
+- red
+- teal
+- white
+- yellow
 
 ### Dependencies
 

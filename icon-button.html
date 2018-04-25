@@ -22,7 +22,7 @@ limitations under the License.
 <link rel="import" href="../paper-styles/color.html">
 
 <!--
-A Polymer Element showing a stylized icon button.
+A Polymer Element showing a stylized icon button.  Use `stylized-icon` if you do not need click/tap behavior.
 
 ### Example
 ```js
@@ -57,6 +57,30 @@ Custom property                | Description                                    
 `--icon-button-hovering-mixin` | The color for the icon button if hovering.              | --paper-grey-900
 `--icon-button-hovering-mixin` | The custom style mixin for the icon button if hovering. | none
 
+The `styleClass` property has the following preconfigured options:
+
+- amber
+- black
+- blue
+- blue-grey
+- brown
+- cyan
+- deep-orange
+- deep-purple
+- green
+- grey
+- indigo
+- light-blue
+- light-green
+- lime
+- orange
+- pink
+- purple
+- red
+- teal
+- white
+- yellow
+
 @demo demo/index.html
 -->
 
@@ -71,6 +95,8 @@ Custom property                | Description                                    
         border-radius: 50%;
         color: var(--icon-button-color, var(--paper-grey-600));
         cursor: pointer;
+        display: flex;
+        font-weight: 500;
         height: 20px;
         width: 20px;
         line-height: 20px;
@@ -99,6 +125,7 @@ Custom property                | Description                                    
 
       paper-icon-button[disabled] {
         color: var(--icon-button-disabled-color, var(--paper-grey-300));
+        opacity: 0.5;
         @apply --icon-button-disabled-mixin;
       }
 
@@ -287,79 +314,79 @@ Custom property                | Description                                    
       }
 
       paper-icon-button.amber[disabled] {
-        color: var(--paper-amber-100);
+        color: var(--paper-amber-300);
       }
 
       paper-icon-button.blue[disabled] {
-        color: var(--paper-blue-100);
+        color: var(--paper-blue-300);
       }
 
       paper-icon-button.blue-grey[disabled] {
-        color: var(--paper-blue-grey-100);
+        color: var(--paper-blue-grey-300);
       }
 
       paper-icon-button.brown[disabled] {
-        color: var(--paper-brown-100);
+        color: var(--paper-brown-300);
       }
 
       paper-icon-button.cyan[disabled] {
-        color: var(--paper-cyan-100);
+        color: var(--paper-cyan-300);
       }
 
       paper-icon-button.deep-orange[disabled] {
-        color: var(--paper-deep-orange-100);
+        color: var(--paper-deep-orange-300);
       }
 
       paper-icon-button.deep-purple[disabled] {
-        color: var(--paper-deep-purple-100);
+        color: var(--paper-deep-purple-300);
       }
 
       paper-icon-button.green[disabled] {
-        color: var(--paper-green-100);
+        color: var(--paper-green-300);
       }
 
       paper-icon-button.grey[disabled] {
-        color: var(--paper-grey-100);
+        color: var(--paper-grey-300);
       }
 
       paper-icon-button.indigo[disabled] {
-        color: var(--paper-indigo-100);
+        color: var(--paper-indigo-300);
       }
 
       paper-icon-button.light-blue[disabled] {
-        color: var(--paper-light-blue-100);
+        color: var(--paper-light-blue-300);
       }
 
       paper-icon-button.light-green[disabled] {
-        color: var(--paper-light-green-100);
+        color: var(--paper-light-green-300);
       }
 
       paper-icon-button.lime[disabled] {
-        color: var(--paper-lime-100);
+        color: var(--paper-lime-300);
       }
 
       paper-icon-button.orange[disabled] {
-        color: var(--paper-orange-100);
+        color: var(--paper-orange-300);
       }
 
       paper-icon-button.pink[disabled] {
-        color: var(--paper-pink-100);
+        color: var(--paper-pink-300);
       }
 
       paper-icon-button.purple[disabled] {
-        color: var(--paper-purple-100);
+        color: var(--paper-purple-300);
       }
 
       paper-icon-button.red[disabled] {
-        color: var(--paper-red-100);
+        color: var(--paper-red-300);
       }
 
       paper-icon-button.teal[disabled] {
-        color: var(--paper-teal-100);
+        color: var(--paper-teal-300);
       }
 
       paper-icon-button.yellow[disabled] {
-        color: var(--paper-yellow-100);
+        color: var(--paper-yellow-300);
       }
     </style>
 
@@ -480,7 +507,7 @@ Custom property                | Description                                    
         /**
          * (Optional)
          *
-         * Whether the button is padded 5px rather than 0px.
+         * Whether the button is padded 5px rather than 0px.  Only done if `bigger` is also true.
          *
          * @type {Boolean}
          * @default false
@@ -528,7 +555,7 @@ Custom property                | Description                                    
        * @private
        */
       _getStyleClass: function(active, bigger, padded, styleClass) {
-        return (active ? 'active ' : '') + (bigger ? 'bigger ' : '') + (padded ? 'padded ' : '') + styleClass;
+        return (active ? 'active ' : '') + (bigger ? 'bigger ' : '') + (bigger && padded ? 'padded ' : '') + styleClass;
       },
 
       /**
