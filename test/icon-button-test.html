@@ -31,102 +31,110 @@ limitations under the License.
   </test-fixture>
 
   <script>
-    suite('icon-button tests', function() {
-      var element;
+  suite('icon-button tests', function() {
+  var element;
 
-      setup(function(done) {
-        element = fixture('icon-button-fixture');
-        flush(done);
-      });
+  setup(function(done) {
+    element = fixture('icon-button-fixture');
+    flush(done);
+  });
 
-      test('properties are set as expected', function() {
-        expect(element.active).to.be.false;
-        expect(element.bigger).to.be.false;
-        expect(element.clickListener).to.be.an('Object');
-        expect(element.clickListener.onClick).to.be.a('Function');
-        expect(element.clickProperty).to.equal('onClick');
-        expect(element.disabled).to.be.false;
-        expect(element.hideRipple).to.be.false;
-        expect(element.icon).to.equal('');
-        expect(element.padded).to.be.false;
-        expect(element.styleClass).to.equal('');
-        expect(element.titleTooltip).to.equal('');
-      });
+  test('properties are set as expected', function() {
+    expect(element.active).to.be.false;
+    expect(element.bigger).to.be.false;
+    expect(element.clickListener).to.be.an('Object');
+    expect(element.clickListener.onClick).to.be.a('Function');
+    expect(element.clickProperty).to.equal('onClick');
+    expect(element.disabled).to.be.false;
+    expect(element.hideRipple).to.be.false;
+    expect(element.icon).to.equal('');
+    expect(element.padded).to.be.false;
+    expect(element.styleClass).to.equal('');
+    expect(element.titleTooltip).to.equal('');
+  });
 
-      test('does show icon button', function() {
-        var button = element.$$('paper-icon-button');
-        expect(button).to.exist;
-        expect(button.classList.contains('active')).to.be.false;
-        expect(button.classList.contains('bigger')).to.be.false;
-        expect(button.classList.contains('padded')).to.be.false;
-        expect(button.disabled).to.be.false;
-        expect(button.icon).to.equal('');
-        expect(button.noink).to.be.false;
-        expect(button.title).to.equal('');
-      });
+  test('does show icon button', function() {
+    var button = element.$$('paper-icon-button');
+    expect(button).to.exist;
+    expect(button.classList.contains('active')).to.be.false;
+    expect(button.classList.contains('bigger')).to.be.false;
+    expect(button.classList.contains('padded')).to.be.false;
+    expect(button.disabled).to.be.false;
+    expect(button.icon).to.equal('');
+    expect(button.noink).to.be.false;
+    expect(button.title).to.equal('');
+  });
 
-      test('properties do update icon button', function(done) {
-        element.active = true;
-        element.bigger = true;
-        element.disabled = true;
-        element.hideRipple = true;
-        element.icon = 'icons:polymer';
-        element.padded = true;
-        element.styleClass = 'testStyleClass';
-        element.titleTooltip = 'testText';
+  test('properties do update icon button', function(done) {
+    element.active = true;
+    element.bigger = true;
+    element.disabled = true;
+    element.hideRipple = true;
+    element.icon = 'icons:polymer';
+    element.padded = true;
+    element.styleClass = 'testStyleClass';
+    element.titleTooltip = 'testText';
 
-        flush(function() {
-          var button = element.$$('paper-icon-button');
-          expect(button).to.exist;
-          expect(button.classList.contains('active')).to.be.true;
-          expect(button.classList.contains('bigger')).to.be.true;
-          expect(button.classList.contains('padded')).to.be.true;
-          expect(button.classList.contains('testStyleClass')).to.be.true;
-          expect(button.disabled).to.be.true;
-          expect(button.icon).to.equal('icons:polymer');
-          expect(button.noink).to.be.true;
-          expect(button.title).to.equal('testText');
-          done();
-        });
-      });
-
-      test('_getStyleClass does return as expected', function() {
-        expect(element._getStyleClass(false, false, false, '')).to.equal('');
-        expect(element._getStyleClass(false, false, false, 'testStyleClass')).to.equal('testStyleClass');
-        expect(element._getStyleClass(true, false, false, '')).to.equal('active ');
-        expect(element._getStyleClass(false, true, false, '')).to.equal('bigger ');
-        expect(element._getStyleClass(false, false, true, '')).to.equal('');
-        expect(element._getStyleClass(false, true, true, '')).to.equal('bigger padded ');
-        expect(element._getStyleClass(true, true, true, '')).to.equal('active bigger padded ');
-        expect(element._getStyleClass(true, true, true, 'testStyleClass')).to.equal('active bigger padded testStyleClass');
-      });
-
-      test('_onClick does call clickListener[clickProperty]', function() {
-        var calls = 0;
-        element.clickListener = {
-          onClick: function() {
-            calls++;
-          }
-        };
-
-        element._onClick();
-        expect(calls).to.equal(1);
-
-        element.clickProperty = 'testFunction';
-        element.clickListener = {
-          testFunction: function() {
-            calls++;
-          }
-        };
-
-        element._onClick();
-        expect(calls).to.equal(2);
-      });
-
-      test('does fire click and tap events', function() {
-        // TODO
-      });
+    flush(function() {
+      var button = element.$$('paper-icon-button');
+      expect(button).to.exist;
+      expect(button.classList.contains('active')).to.be.true;
+      expect(button.classList.contains('bigger')).to.be.true;
+      expect(button.classList.contains('padded')).to.be.true;
+      expect(button.classList.contains('testStyleClass')).to.be.true;
+      expect(button.disabled).to.be.true;
+      expect(button.icon).to.equal('icons:polymer');
+      expect(button.noink).to.be.true;
+      expect(button.title).to.equal('testText');
+      done();
     });
-  </script>
+  });
+
+  test('_getStyleClass does return as expected', function() {
+    expect(element._getStyleClass(false, false, false, '')).to.equal('');
+    expect(
+      element._getStyleClass(false, false, false, 'testStyleClass')
+    ).to.equal('testStyleClass');
+    expect(element._getStyleClass(true, false, false, '')).to.equal('active ');
+    expect(element._getStyleClass(false, true, false, '')).to.equal('bigger ');
+    expect(element._getStyleClass(false, false, true, '')).to.equal('');
+    expect(element._getStyleClass(false, true, true, '')).to.equal(
+      'bigger padded '
+    );
+    expect(element._getStyleClass(true, true, true, '')).to.equal(
+      'active bigger padded '
+    );
+    expect(element._getStyleClass(true, true, true, 'testStyleClass')).to.equal(
+      'active bigger padded testStyleClass'
+    );
+  });
+
+  test('_onClick does call clickListener[clickProperty]', function() {
+    var calls = 0;
+    element.clickListener = {
+      onClick: function() {
+        calls++;
+      }
+    };
+
+    element._onClick();
+    expect(calls).to.equal(1);
+
+    element.clickProperty = 'testFunction';
+    element.clickListener = {
+      testFunction: function() {
+        calls++;
+      }
+    };
+
+    element._onClick();
+    expect(calls).to.equal(2);
+  });
+
+  test('does fire click and tap events', function() {
+    // TODO
+  });
+});
+</script>
 </body>
 </html>
